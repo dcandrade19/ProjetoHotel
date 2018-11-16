@@ -1,0 +1,109 @@
+﻿@model Data.Reservas.Model.Reserva
+
+@{
+    ViewBag.Title = "Criar Nova";
+}
+
+<h2>Criar Nova</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Reserva</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TuristaId, "Turista CPF", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="hidden" id="TuristaId" name="TuristaId" />
+                <input type="text" id="TuristaCpf" class="form-control cpf" />
+                @Html.ValidationMessageFor(model => model.TuristaId, "", new { @class = "text-danger" })
+                <input type="button" class="btn btn-success btn-block" value="Buscar" style="margin-top: 4px;" onclick="BuscarTurista(); return false;" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Chegada, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Chegada, new { htmlAttributes = new { @class = "form-control ", type = "date", min = DateTime.Now.ToString("yyyy-MM-dd") } })
+                @Html.ValidationMessageFor(model => model.Chegada, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Partida, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Partida, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                @Html.ValidationMessageFor(model => model.Partida, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Hotel", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @{
+                    var hoteis = new SelectList(ViewBag.Hoteis, "HotelId", "Nome", 0);
+                    if (hoteis.Count() > 0)
+                    {
+                        @Html.DropDownList("HotelId", hoteis, htmlAttributes: new { @class = "form-control" })
+                    }
+                    else
+                    {
+                        <p>Não há hoteis cadastrados.</p>
+                    }
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Quarto", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select class="form-control" data-val="true" data-val-required="O campo Quarto é obrigatório." id="QuartoId" name="QuartoId">
+                    <option>Selecione um hotel...</option>
+                </select>
+                @Html.ValidationMessageFor(model => model.QuartoId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Ocupantes", "Ocupantes", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input id="Ocupantes" min="1" type="number" value="1" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Criancas", "Crianças", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Criancas", new SelectList(new[] { new { Value = false, Text = "Não" }, new { Value = true, Text = "Sim" } }, "Value", "Text", 0), htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ValorDiaria, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ValorDiaria, new { htmlAttributes = new { @class = "form-control moeda", @readonly = "readonly" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-default" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/Geral/gerarValorDiaria.js")
+    @Scripts.Render("~/Scripts/Geral/buscasViaApi.js")
+}

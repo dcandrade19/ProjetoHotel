@@ -1,0 +1,107 @@
+﻿@model PagedList.IPagedList<Data.Reservas.Model.Quarto>
+
+@{
+    ViewBag.Title = "Quartos";
+}
+
+<h2>Quartos</h2>
+
+<div class="row">
+    <p class="col-md-6">
+        @Html.ActionLink("Criar Novo", "CriarNovo", null, new { @class = "btn btn-primary" })
+    </p>
+    <p class="col-md-6 text-right">
+        <a class="btn btn-primary baixar-xml">Gerar XML</a>
+    </p>
+</div>
+<div class="table-responsive">
+    <table class="table table-condensed table-bordered">
+        <tr>
+            <th>
+                Hotel
+            </th>
+            <th>
+                Titulo
+            </th>
+            <th>
+                Descrição
+            </th>
+            <th>
+                Quantidade
+            </th>
+            <th>
+                Disponivel
+            </th>
+            <th>
+                Max. de Ocupantes
+            </th>
+            <th>
+                Diaria
+            </th>
+            <th>
+                Diaria Criança
+            </th>
+            <th>
+                Diaria por Ocupante
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hotel.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Titulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantidade)
+                </td>
+                <td>
+                    @(item.Disponiveis > 0 ? item.Disponiveis.ToString() : "Indisponivel")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaximoOcupantes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorDiaria)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorDiariaCrianca)
+                </td>
+                <td>
+                    @(item.DiariaPorOcupante == true ? "Sim" : "Não")
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Editar", new { id = item.QuartoId }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Detalhes", "Detalhes", new { id = item.QuartoId }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Deletar", "Deletar", new { id = item.QuartoId }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+@Html.Partial("~/Views/Shared/_Paginacao.cshtml")
+
+@section Scripts {
+    <script>
+        var controllerNome = "Quarto";
+    </script>
+    @if (TempData["resultado"] != null)
+    {
+        <script>
+            var resultado = '@TempData["resultado"]';
+            var id = '@TempData["id"]';
+            var nome = '@TempData["nome"]';
+            var controller = '@TempData["controller"]';
+        </script>
+    }
+    <script src="~/Scripts/Geral/gerarAlertas.js"></script>
+    <script src="~/Scripts/Geral/confirmarGerarXml.js"></script>
+}

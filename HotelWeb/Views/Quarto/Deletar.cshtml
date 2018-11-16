@@ -1,0 +1,96 @@
+﻿@model Data.Reservas.Model.Quarto
+
+@{
+    ViewBag.Title = "Deletar";
+}
+
+<h2>Deletar</h2>
+
+<h3>Tem certeza que deseja deletar este item?</h3>
+<div>
+    <h4>Quarto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Hotel.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hotel.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantidade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Disponiveis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Disponiveis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaximoOcupantes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaximoOcupantes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValorDiaria)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValorDiaria)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValorDiariaCrianca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValorDiariaCrianca)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiariaPorOcupante)
+        </dt>
+
+        <dd>
+            @(Model.DiariaPorOcupante == true ? "Sim" : "Não")
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Deletar" class="btn btn-danger" /> 
+            @Html.ActionLink("Voltar", "Index",null,new { @class="btn btn-default"})
+        </div>
+    }
+</div>

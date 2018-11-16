@@ -1,0 +1,21 @@
+USE [ReservasDataBase]
+GO
+
+/****** Object:  Table [dbo].[Ufs]    Script Date: 20/09/2018 20:21:29 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Ufs](
+	[UfId] [char](2) NOT NULL,
+	[DescUf] [varchar](60) NOT NULL,
+ CONSTRAINT [PK_dbo.Ufs] PRIMARY KEY CLUSTERED 
+(
+	[UfId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+

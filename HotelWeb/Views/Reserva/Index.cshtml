@@ -1,0 +1,89 @@
+﻿@model PagedList.IPagedList<Data.Reservas.Model.Reserva>
+
+@{
+    ViewBag.Title = "Reservas";
+}
+
+<h2>Reservas</h2>
+
+<div class="row">
+    <p class="col-md-6">
+        @Html.ActionLink("Criar Novo", "CriarNovo", null, new { @class = "btn btn-primary" })
+    </p>
+    <p class="col-md-6 text-right">
+        <a class="btn btn-primary baixar-xml">Gerar XML</a>
+    </p>
+</div>
+<div class="table-responsive">
+    <table class="table table-condensed table-bordered">
+        <tr>
+            <th>
+                Quarto
+            </th>
+            <th>
+                Turista
+            </th>
+            <th>
+                Data da Reserva
+            </th>
+            <th>
+                Chegada
+            </th>
+            <th>
+                Partida
+            </th>
+            <th>
+                Valor da Diaria
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quarto.Titulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Turista.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataReserva)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Chegada)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Partida)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorDiaria)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Editar", new { id = item.ReservaId }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Detalhes", "Detalhes", new { id = item.ReservaId }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Deletar", "Deletar", new { id = item.ReservaId }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+    </div>
+    @Html.Partial("~/Views/Shared/_Paginacao.cshtml")
+
+    @section Scripts {
+        <script>
+            var controllerNome = "Reserva";
+        </script>
+        @if (TempData["resultado"] != null)
+        {
+            <script>
+            var resultado = '@TempData["resultado"]';
+            var id = '@TempData["id"]';
+            var nome = '@TempData["nome"]';
+            var controller = '@TempData["controller"]';
+            </script>
+        }
+        <script src="~/Scripts/Geral/gerarAlertas.js"></script>
+        <script src="~/Scripts/Geral/confirmarGerarXml.js"></script>
+    }

@@ -1,0 +1,84 @@
+﻿@model PagedList.IPagedList<Data.Reservas.Model.Turista>
+
+@{
+    ViewBag.Title = "Turistas";
+}
+
+<h2>Turistas</h2>
+
+<div class="row">
+    <p class="col-md-6">
+        @Html.ActionLink("Criar Novo", "CriarNovo", null, new { @class = "btn btn-primary" })
+    </p>
+    <p class="col-md-6 text-right">
+        <a class="btn btn-primary baixar-xml">Gerar XML</a>
+    </p>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-condensed table-bordered">
+        <tr>
+            <th>
+                Nome
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Sexo
+            </th>
+            <th>
+                Data de Nascimento
+            </th>
+            <th>
+                CPF
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @(item.Sexo == true ? "Masculino" : "Feminino")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataNascimento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cpf)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Editar", new { id = item.TuristaId }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Detalhes", "Detalhes", new { id = item.TuristaId }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Deletar", "Deletar", new { id = item.TuristaId }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+    @Html.Partial("~/Views/Shared/_Paginacao.cshtml")
+
+    @section Scripts {
+        <script>
+            var controllerNome = "Turista";
+        </script>
+        @if (TempData["resultado"] != null)
+        {
+            <script>
+            var resultado = '@TempData["resultado"]';
+            var id = '@TempData["id"]';
+            var nome = '@TempData["nome"]';
+            var controller = '@TempData["controller"]';
+            </script>
+        }
+        <script src="~/Scripts/Geral/gerarAlertas.js"></script>
+        <script src="~/Scripts/Geral/confirmarGerarXml.js"></script>
+    }

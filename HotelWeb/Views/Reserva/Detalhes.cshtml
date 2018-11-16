@@ -1,0 +1,195 @@
+﻿@model Data.Reservas.Model.Reserva
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<h2>Detalhes</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <!-- Default panel contents -->
+            <div class="panel-heading"><h4>Reserva</h4></div>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Quarto.Titulo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Quarto.Titulo)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Turista.Nome)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Turista.Nome)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DataReserva)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DataReserva)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Chegada)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Chegada)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Partida)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Partida)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ValorDiaria)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ValorDiaria)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Editar", "Editar", new { id = Model.ReservaId }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-default" })
+        </p>
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <!-- Default panel contents -->
+                <div class="panel-heading">
+                    <h4>
+                        Hotel <small style="color: whitesmoke">@Html.DisplayFor(model => model.Quarto.Hotel.Nome)</small>
+                        <small style="float: right;">@Html.ActionLink("Detalhes", "Detalhes","Hotel", new { id = Model.Quarto.HotelId }, new { @class = "btn btn-success", target = "_blank" })</small>
+                    </h4>
+                    
+                </div>
+                <dl class="dl-horizontal">
+                    <dt>
+                        DDD
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Quarto.Hotel.Ddd)
+                    </dd>
+
+                    <dt>
+                        Telefone
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Quarto.Hotel.Telefone)
+                    </dd>
+
+                    <dt>
+                        Descrição
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Quarto.Hotel.Descricao)
+                    </dd>
+                </dl>
+            </div>
+
+        </div>
+
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <!-- Default panel contents -->
+                <div class="panel-heading">
+                    <h4>
+                        Quarto <small style="color: whitesmoke">@Html.DisplayFor(model => model.Quarto.Titulo)</small>
+                        <small style="float: right;">@Html.ActionLink("Detalhes", "Detalhes", "Quarto", new { id = Model.Quarto.QuartoId }, new { @class = "btn btn-success", target = "_blank" })</small>
+                    </h4>
+                </div>
+                <dl class="dl-horizontal">
+                    <dt>
+                        Descrição
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Quarto.Descricao)
+                    </dd>
+
+                    <dt>
+                        Diaria
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Quarto.ValorDiaria)
+                    </dd>
+
+                    <dt>
+                        Diaria por Criança
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Quarto.ValorDiariaCrianca)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <!-- Default panel contents -->
+                <div class="panel-heading">
+                    <h4>
+                        Turista <small style="color: whitesmoke">@Html.DisplayFor(model => model.Turista.Nome)</small>
+                        <small style="float: right;">@Html.ActionLink("Detalhes", "Detalhes", "Turista", new { id = Model.TuristaId }, new { @class = "btn btn-success", target = "_blank" })</small>
+                    </h4>
+                </div>
+                <dl class="dl-horizontal">
+                    <dt>
+                        Email
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Turista.Email)
+                    </dd>
+
+                    <dt>
+                        Sexo
+                    </dt>
+
+                    <dd>
+                        @(Model.Turista.Sexo == true ? "Masculino" : "Feminino")
+                    </dd>
+
+                    <dt>
+                        Data de Nascimento
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Turista.DataNascimento)
+                    </dd>
+
+                    <dt>
+                        CPF
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Turista.Cpf)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+   

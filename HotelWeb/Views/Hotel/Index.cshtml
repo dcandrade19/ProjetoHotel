@@ -1,0 +1,113 @@
+﻿@model PagedList.IPagedList<Data.Reservas.Model.Hotel>
+
+@{
+    ViewBag.Title = "Hoteis";
+}
+
+<h2>Hoteis</h2>
+
+<div class="row">
+    <p class="col-md-6">
+        @Html.ActionLink("Criar Novo", "CriarNovo", null, new { @class = "btn btn-primary" })
+    </p>
+    <p class="col-md-6 text-right">
+        <a class="btn btn-primary baixar-xml">Gerar XML</a>
+    </p>
+</div>
+<div class="table-responsive">
+    <table class="table table-condensed table-bordered">
+        <tr>
+            <th>
+                Nome
+            </th>
+            <th>
+                Endereço
+            </th>
+            <th>
+                Numero
+            </th>
+            <th>
+                Complemento
+            </th>
+            <th>
+                CEP
+            </th>
+            <th>
+                Cidade
+            </th>
+            <th>
+                UF
+            </th>
+            <th>
+                DDD
+            </th>
+            <th>
+                Telefone
+            </th>
+            <th>
+                Descrição
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Endereco)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Numero)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Complemento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cep)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Uf)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ddd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Editar", new { id = item.HotelId }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Detalhes", "Detalhes", new { id = item.HotelId }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Deletar", "Deletar", new { id = item.HotelId }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+@Html.Partial("~/Views/Shared/_Paginacao.cshtml")
+
+@section Scripts {
+    <script>
+        var controllerNome = "Hotel";
+    </script>
+    @if (TempData["resultado"] != null)
+    {
+        <script>
+            var resultado = '@TempData["resultado"]';
+            var id = '@TempData["id"]';
+            var nome = '@TempData["nome"]';
+            var controller = '@TempData["controller"]';
+        </script>
+    }
+    <script src="~/Scripts/Geral/gerarAlertas.js"></script>
+    <script src="~/Scripts/Geral/confirmarGerarXml.js"></script>
+}

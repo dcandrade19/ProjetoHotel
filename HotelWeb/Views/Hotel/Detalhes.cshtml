@@ -1,0 +1,183 @@
+﻿@model Data.Reservas.Model.Hotel
+
+@{
+    ViewBag.Title = "Detalhes";
+    List<Data.Reservas.Model.Quarto> quartos = (List<Data.Reservas.Model.Quarto>)ViewBag.Quartos;
+}
+
+<h2>Detalhes</h2>
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <!-- Default panel contents -->
+            <div class="panel-heading"><h4>Hotel</h4></div>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Nome)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Endereco)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Endereco)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Numero)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Numero)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Complemento)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Complemento)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Cep)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Cep)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Cidade)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Cidade)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Bairro)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Bairro)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Uf)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Uf)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Ddd)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Ddd)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Telefone)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Telefone)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Descricao)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Descricao)
+                </dd>
+
+            </dl>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <h4>
+                    Quartos
+                    <small style="float: right;">@Html.ActionLink("Criar Novo", "CriarNovo", "Quarto", new { hotelId = Model.HotelId }, new { @class = "btn btn-primary" })</small>
+                </h4>
+            </div>
+
+            @if (quartos.Count > 0)
+            {
+                <div class="table-responsive">
+                    <table class="table table-condensed">
+                        <tr>
+                            <th>
+                                Titulo
+                            </th>
+                            <th>
+                                Quantidade
+                            </th>
+                            <th>
+                                Disponiveis
+                            </th>
+                            <th>
+                                Diaria
+                            </th>
+                            <th>
+                                Criança
+                            </th>
+                            <th>
+
+                            </th>
+                        </tr>
+
+                        @foreach (var item in quartos)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Titulo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Quantidade)
+                                </td>
+                                <td>
+                                    @(item.Disponiveis > 0 ? item.Disponiveis.ToString() : "Indisponivel")
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ValorDiaria)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ValorDiariaCrianca)
+                                </td>
+                                <td>
+                                    @Html.ActionLink(" ", "Editar", "Quarto",new { id = item.QuartoId },
+                                    new { @class = "btn btn-primary glyphicon glyphicon-pencil", data_toggle = "tooltip", title = "Editar" })
+                                    @Html.ActionLink(" ", "Detalhes", "Quarto", new { id = item.QuartoId },
+                                    new { @class = "btn btn-success glyphicon glyphicon-th-list", data_toggle = "tooltip", title = "Detalhes" })
+                                    @Html.ActionLink(" ", "Deletar", "Quarto", new { id = item.QuartoId },
+                                    new { @class = "btn btn-danger glyphicon glyphicon-remove", data_toggle = "tooltip", title = "Deletar" })
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            }
+            else
+            {
+                <p style="padding: 5px">Este hotel não possui quartos cadastrados.</p>
+            }
+        </div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Editar", new { id = Model.HotelId }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-default" })
+</p>

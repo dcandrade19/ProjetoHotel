@@ -1,0 +1,170 @@
+﻿@model Data.Reservas.Model.Quarto
+
+@{
+    ViewBag.Title = "Detalhes";
+    List<Data.Reservas.Model.Reserva> reservas = (List<Data.Reservas.Model.Reserva>)ViewBag.Reservas;
+}
+
+<h2>Detalhes</h2>
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <!-- Default panel contents -->
+            <div class="panel-heading"><h4>Quarto</h4></div>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Hotel.Nome)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Hotel.Nome)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Titulo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Titulo)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Descricao)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Descricao)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Quantidade)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Quantidade)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Disponiveis)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Disponiveis)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.MaximoOcupantes)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.MaximoOcupantes)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ValorDiaria)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ValorDiaria)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ValorDiariaCrianca)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ValorDiariaCrianca)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DiariaPorOcupante)
+                </dt>
+
+                <dd>
+                    @(Model.DiariaPorOcupante == true ? "Sim" : "Não")
+                </dd>
+
+            </dl>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <h4>
+                    Reservas
+                    <small style="float: right;">
+                        @if (Model.Disponiveis > 0)
+                        {
+                            @Html.ActionLink("Criar Novo", "CriarNovo", "Reserva", new { quartoId = Model.QuartoId }, new { @class = "btn btn-primary" })
+                        }
+                    </small>
+                </h4>
+            </div>
+            @if (reservas.Count > 0)
+            {
+                <div class="table-responsive">
+                    <table class="table table-condensed">
+                        <tr>
+                            <th>
+                                Turista
+                            </th>
+                            <th>
+                                Data da Reserva
+                            </th>
+                            <th>
+                                Chegada
+                            </th>
+                            <th>
+                                Partida
+                            </th>
+                            <th>
+                                Diaria
+                            </th>
+                            <th>
+
+                            </th>
+                        </tr>
+
+                        @foreach (var item in reservas)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Turista.Nome)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DataReserva)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Chegada)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Partida)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ValorDiaria)
+                                </td>
+                                <td>
+                                    @Html.ActionLink(" ", "Editar", "Reserva",new { id = item.ReservaId },
+                                    new { @class = "btn btn-primary glyphicon glyphicon-pencil", data_toggle = "tooltip", title = "Editar" })
+                                    @Html.ActionLink(" ", "Detalhes", "Reserva", new { id = item.ReservaId },
+                                    new { @class = "btn btn-success glyphicon glyphicon-th-list", data_toggle = "tooltip", title = "Detalhes" })
+                                    @Html.ActionLink(" ", "Deletar", "Reserva", new { id = item.ReservaId },
+                                    new { @class = "btn btn-danger glyphicon glyphicon-remove", data_toggle = "tooltip", title = "Deletar" })
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            }
+            else
+            {
+                <p style="padding: 5px">Este quarto não possui reservas cadastradas.</p>
+            }
+        </div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Editar", new { id = Model.QuartoId }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-default" })
+</p>

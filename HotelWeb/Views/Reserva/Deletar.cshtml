@@ -1,0 +1,72 @@
+﻿@model Data.Reservas.Model.Reserva
+
+@{
+    ViewBag.Title = "Deletar";
+}
+
+<h2>Deletar</h2>
+
+<h3>Tem certeza que deseja deletar este item?</h3>
+<div>
+    <h4>Reserva</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Quarto.Titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quarto.Titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Turista.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Turista.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataReserva)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataReserva)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Chegada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Chegada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Partida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Partida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValorDiaria)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValorDiaria)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-danger" /> 
+        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-default" })
+    </div>
+    }
+</div>

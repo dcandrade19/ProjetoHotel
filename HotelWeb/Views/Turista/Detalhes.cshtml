@@ -1,0 +1,149 @@
+﻿@model Data.Reservas.Model.Turista
+
+@{
+    ViewBag.Title = "Detalhes";
+    List<Data.Reservas.Model.Reserva> reservas = (List<Data.Reservas.Model.Reserva>)ViewBag.Reservas;
+}
+
+<h2>Detalhes</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <h4>Turista</h4>
+            </div>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Nome)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Sexo)
+                </dt>
+
+                <dd>
+                    @(Model.Sexo == true ? "Masculino" : "Feminino")
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DataNascimento)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DataNascimento)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Cpf)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Cpf)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Senha)
+                </dt>
+
+                <dd>
+                    ******
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Editar", "Editar", new { id = Model.TuristaId }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-default" })
+        </p>
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <!-- Default panel contents -->
+                <div class="panel-heading">
+                    <h4>
+                        Reservas
+                        <small style="float: right;">@Html.ActionLink("Criar Novo", "CriarNovo", "Reserva", new { turistaId = Model.TuristaId }, new { @class = "btn btn-primary" })</small>
+                    </h4>
+                </div>
+                @if (reservas.Count > 0)
+                {
+                    <div class="table-responsive">
+                        <table class="table table-condensed">
+                            <tr>
+                                <th>
+                                    Quarto
+                                </th>
+                                <th>
+                                    Reserva
+                                </th>
+                                <th>
+                                    Chegada
+                                </th>
+                                <th>
+                                    Partida
+                                </th>
+                                <th>
+                                    Diaria
+                                </th>
+                                <th>
+
+                                </th>
+                            </tr>
+
+                            @foreach (var item in reservas)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Quarto.Titulo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DataReserva)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Chegada)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Partida)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ValorDiaria)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink(" ", "Editar", "Reserva",new { id = item.ReservaId },
+                                        new { @class = "btn btn-primary glyphicon glyphicon-pencil", data_toggle = "tooltip", title = "Editar" })
+                                        @Html.ActionLink(" ", "Detalhes", "Reserva", new { id = item.ReservaId },
+                                        new { @class = "btn btn-success glyphicon glyphicon-th-list", data_toggle = "tooltip", title = "Detalhes" })
+                                        @Html.ActionLink(" ", "Deletar", "Reserva", new { id = item.ReservaId },
+                                        new { @class = "btn btn-danger glyphicon glyphicon-remove", data_toggle = "tooltip", title = "Deletar" })
+                                    </td>
+                                </tr>
+                            }
+
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <p style="padding: 5px">Este turista não possui reservas cadastradas.</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
